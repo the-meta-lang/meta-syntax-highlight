@@ -2,7 +2,7 @@
     "name": "meta-highlight",
     "displayName": "meta-syntax-highlighting",
     "description": "A Syntax Highlighting Extension for the C-Meta Compiler Writing Language",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "engines": {
         "vscode": "^1.75.0"
     },
@@ -21,7 +21,11 @@
                     ".meta",
                     ".cmeta"
                 ],
-                "configuration": "./language-configuration.json"
+                "configuration": "./language-configuration.json",
+								"icon": {
+									"dark": "./icons/dark.svg",
+									"light": "./icons/light.svg"
+								}
             }
         ],
         "grammars": [
@@ -30,18 +34,9 @@
                 "scopeName": "source.meta",
                 "path": "./syntaxes/meta.tmLanguage.json"
             }
-        ],
-				"icons": {
-					"meta-icon": {
-						"description": "Meta Programming Language Icon",
-						"default": {
-							"fontPath": "myiconfont.woff",
-							"fontCharacter": "\\E001"
-						}
-					}
-				}
+        ]
     },
-		"icon": "",
+		"icon": "https://github.com/the-meta-lang/meta-syntax-highlight/blob/main/icons/vs-code-icon.png",
     "license": "MIT",
     "publisher": "Letsmoe",
     "author": {
