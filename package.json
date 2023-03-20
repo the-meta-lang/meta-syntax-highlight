@@ -2,7 +2,7 @@
     "name": "meta-highlight",
     "displayName": "meta-syntax-highlighting",
     "description": "A Syntax Highlighting Extension for the C-Meta Compiler Writing Language",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "engines": {
         "vscode": "^1.75.0"
     },
@@ -23,8 +23,8 @@
                 ],
                 "configuration": "./language-configuration.json",
 								"icon": {
-									"dark": "./icons/dark.svg",
-									"light": "./icons/light.svg"
+									"dark": "./icons/icon-dark.svg",
+									"light": "./icons/icon-light.svg"
 								}
             }
         ],
@@ -36,7 +36,11 @@
             }
         ]
     },
-		"icon": "https://github.com/the-meta-lang/meta-syntax-highlight/blob/main/icons/vs-code-icon.png",
+		"icon": "icons/vs-code-icon.png",
+		"repository": {
+			"type": "git",
+			"url": "https://github.com/the-meta-lang/meta-syntax-highlight"
+		},
     "license": "MIT",
     "publisher": "Letsmoe",
     "author": {
