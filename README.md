@@ -7,7 +7,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/the-meta-lang/meta-syntax-highlight">
-    <img src="icons/icon-dark.svg" alt="Logo" width="120" height="120">
+    <img src="icons/dark.png" alt="Logo" width="120" height="120">
   </a>
 
 <h3 align="center">META Syntax Highlighting</h3>
