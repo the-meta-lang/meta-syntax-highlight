@@ -1,0 +1,192 @@
+## Created With Iro: https://eeyo.io/iro/
+
+
+name                   = mlisp
+file_extensions []     = mlisp;
+
+################################################################
+## Constants
+################################################################
+
+
+__KEYWORD \= (defunc|define|while|for|if|return|asm|set!)
+__IDENTIFIER \= ((?:[A-Z]|[a-z]|[_$!])(?:[A-Z]|[a-z]|[0-9]|[_$!-])+)
+__OPERATORS \= ([+=\-<>\\*&^%$#@!?])
+
+################################################################
+## Styles
+################################################################
+
+styles [] {
+
+.comment : style {
+   color                 = light_green
+   italic                = true
+   textmate_scope        = comment.line
+}
+
+.keyword : style {
+   color     = cyan
+   textmate_scope        = keyword.other
+}
+
+.numeric : style {
+   color                 = gold
+   textmate_scope        = constant.numeric
+}
+
+.punctuation : style {
+   color     = red_2
+   textmate_scope        = punctuation.definition.bold
+}
+
+.text : style {
+   color                 = blue
+   textmate_scope        = string.quoted.double
+}
+
+
+.identifier : style {
+   color = green
+   textmate_scope = variable.other
+}
+
+.operators : style {
+   color = violet
+   textmate_scope = keyword.operator
+}
+
+.function : style {
+   color = red
+   textmate_scope = entity.function
+}
+
+
+
+}
+
+#################################################
+## Parse contexts
+#################################################
+
+contexts [] {
+
+##############################################
+## Main Context - Entry point context
+##############################################
+
+main : context {
+
+   : pattern {
+      regex \= $${__OPERATORS}
+      styles[] = .operators;
+   }
+   
+   : pattern {
+      regex \= $${__KEYWORD}
+      styles[] = .keyword;
+   }
+   
+   : include "numeric" ;
+   
+   : inline_push {
+      regex          \= (\[)([+=\-<>\\*&^%$#@!?])
+      styles []       = .punctuation, .operators;
+      : pop {  
+         regex       \= (\])
+         styles []    = .punctuation;
+      }
+      : pattern {
+         regex \= $${__KEYWORD}
+         styles[] = .keyword;
+      }
+      : pattern {
+         regex \= $${__IDENTIFIER}
+         styles[] = .identifier;
+      }
+      : include "main" ;
+   }
+   
+   : inline_push {
+      regex          \= (\[)(defunc|define|while|for|if|return|asm|set!)
+      styles []       = .punctuation, .keyword;
+      : pop {  
+         regex       \= (\])
+         styles []    = .punctuation;
+      }
+      : pattern {
+         regex \= $${__KEYWORD}
+         styles[] = .keyword;
+      }
+      : pattern {
+         regex \= $${__IDENTIFIER}
+         styles[] = .identifier;
+      }
+      : include "main" ;
+   }
+   
+   : inline_push {
+      regex          \= (\[)((?:[A-Z]|[a-z]|[_$!])(?:[A-Z]|[a-z]|[0-9]|[_$!-])+)
+      styles []       = .punctuation, .function;
+      : pop {  
+         regex       \= (\])
+         styles []    = .punctuation;
+      }
+      : pattern {
+         regex \= $${__KEYWORD}
+         styles[] = .keyword;
+      }
+      : pattern {
+         regex \= $${__IDENTIFIER}
+         styles[] = .identifier;
+      }
+      : include "main" ;
+   }
+   
+   : inline_push {
+      regex          \= (\")
+      styles []       = .punctuation;
+      default_style   = .text
+      : pop {
+         regex       \= (\")
+         styles []    = .punctuation;
+      }
+   }
+   
+   
+   
+   : pattern {
+      regex          \= (//.*)
+      styles []       = .comment;
+   }
+   
+}
+
+#################################################
+## End of Contexts
+#################################################
+
+###########################################
+## Numeric Context
+###########################################
+
+numeric : context {
+   : pattern {
+      regex          \= (\b\d+)
+      styles []       = .numeric;
+   }
+}
+
+###########################################
+## Single Line Comment Context
+###########################################
+
+single_line_comment : context {
+   description        = singleline
+   : pattern {
+      regex          \= (^//.*$)
+      styles []       = .comment;
+   }
+}
+   
+}

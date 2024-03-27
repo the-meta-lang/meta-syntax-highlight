@@ -1,8 +1,8 @@
 {
     "name": "meta-highlight",
-    "displayName": "meta-syntax-highlighting",
-    "description": "A Syntax Highlighting Extension for the C-Meta Compiler Writing Language",
-    "version": "0.0.6",
+    "displayName": "META Syntax Highlighting",
+    "description": "A Syntax Highlighting Extension for the META Compiler Writing Toolchain (includes META, METALS and META Lisp highlighters)",
+    "version": "0.0.7",
     "engines": {
         "vscode": "^1.75.0"
     },
@@ -14,26 +14,43 @@
             {
                 "id": "meta",
                 "aliases": [
-                    "Meta",
-                    "meta"
+                    "META"
                 ],
                 "extensions": [
-                    ".meta",
-                    ".cmeta"
+                    ".meta"
                 ],
-                "configuration": "./language-configuration.json",
+                "configuration": "./config/meta.language-configuration.json",
 								"icon": {
 									"dark": "./icons/icon-dark.svg",
 									"light": "./icons/icon-light.svg"
 								}
-            }
+            },
+						{
+							"id": "mlisp",
+							"aliases": [
+									"META Lisp"
+							],
+							"extensions": [
+									".mlisp"
+							],
+							"configuration": "./config/mlisp-language-configuration.json",
+							"icon": {
+								"dark": "./icons/icon-dark.svg",
+								"light": "./icons/icon-light.svg"
+							}
+					}
         ],
         "grammars": [
             {
                 "language": "meta",
                 "scopeName": "source.meta",
                 "path": "./syntaxes/meta.tmLanguage.json"
-            }
+            },
+						{
+							"language": "mlisp",
+							"scopeName": "source.mlisp",
+							"path": "./syntaxes/mlisp.tmLanguage.json"
+					}
         ]
     },
 		"icon": "icons/vs-code-icon.png",
